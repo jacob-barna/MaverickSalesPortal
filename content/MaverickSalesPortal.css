@@ -1,0 +1,5 @@
+.verticalLine {
+    border-left: medium solid #000000;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

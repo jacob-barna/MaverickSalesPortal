@@ -1,0 +1,35 @@
+<h1>Approve Page:</h1>
+<table class="table-condensed table-bordered col-md-6">
+    <tr>
+      <th>Name</th>
+       <th>E-mail</th> 
+      <th>Approve</th>
+       <th>Reject</th>
+    </tr>
+    <tr data-ng-repeat="u in usersToApprove | orderBy:['LastName','FirstName']">
+        <td>{{u.FirstName}} {{ u.LastName }}</td>
+        <td>{{ u.Email }}</td> 
+        <td><a data-ng-click="openSupervisorConfirmDialog(u,'Approve')">Click to Approve</a></td>
+        <td><a data-ng-click="openSupervisorConfirmDialog(u,'Reject')">Click to Reject</a></td>
+    </tr>
+</table>
+
+<script type="text/ng-template" id="supervisorConfirmModal.html">
+     <div class="modal-header">
+         <h3>{{adminFunction}} User - Enter Supervisor Password</h3>
+     </div>
+     <div class="modal-body">
+        <form name="supervisorConfirmForm" novalidate>
+            <fieldset>
+            <label>Password:</label>
+            <input type="password" name="SupervisorPassword" data-ng-model="pswd" required>
+            <span data-ng-show="supervisorConfirmForm.SupervisorPassword.$error.required">*</span>         
+            </fieldset>
+        
+     </div>
+     <div class="modal-footer">
+         <button class="btn btn-primary" ng-click="Ok()" data-ng-disabled="supervisorConfirmForm.$invalid">OK</button>
+         <button class="btn btn-warning" ng-click="Cancel()">Cancel</button>
+     </div>
+     </form>
+ </script>

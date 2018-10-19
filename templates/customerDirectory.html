@@ -1,0 +1,25 @@
+<div class="col-md-8">
+</div>
+<div class="col-md-4">
+    <div class="col-md-12">
+        Welcome {{ currentUser.FirstName }}
+    </div>
+   
+</div>
+<div class="col-md-12">
+<table class="table-condensed table-bordered col-md-8">
+                <tr> 
+                    <th>Customer Name</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Phone Number</th>
+                </tr>
+                <tr data-ng-repeat="c in customerSearchResults">
+                    <td><a href="#/Display/{{c.Id}}">{{c.Name}}</a></td>
+                    <td>{{ c.BillAddress.City }}</td> 
+                    <td>{{ c.BillAddress.State.Name }}</td>
+                    <td>{{ c.ContactDetail.Phone }}</td>
+                </tr>   
+            </table>
+
+</div>

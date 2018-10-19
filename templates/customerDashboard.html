@@ -1,0 +1,87 @@
+<div class="col-md-8">
+</div>
+<div class="col-md-4">
+    <div class="col-md-12">
+        Welcome {{ currentUser.FirstName }}
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <h2>Quarterly Sales</h2>
+        <canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels" chart-click="onChartClick"></canvas> 
+    </div>
+    <div class="col-md-4">
+        <h2>High Grossing Customers</h2>
+        <table class="table-condensed table-bordered col-md-12">
+                <tr> 
+                    <th>Customer Name</th>
+                    <th>Last Order Date</th>
+                    <th>Sales (Curr Year)</th>
+                    <th>Sales (Prev Year)</th>
+                </tr>
+                <tr data-ng-repeat="c in highGrossingCustomers">
+                    <td><a href="#/Display/{{c.CustomerId}}">{{c.CustomerName}}</a></td>
+                    <td>{{ c.LastOrderDate }}</td> 
+                    <td>{{ c.CurrentYearlyTotal | currency }}</td>
+                    <td>{{ c.PreviousYearlyTotal | currency }}</td>
+                </tr>   
+            </table>
+    </div>
+    
+    <div class="col-md-4">
+        <h2>Neglected Customers</h2>
+        <table class="table-condensed table-bordered col-md-12">
+                <tr> 
+                    <th>Customer Name</th>
+                    <th>Last Order Date</th>
+                    <th>Sales (Curr Year)</th>
+                    <th>Sales (Prev Year)</th>
+                </tr>
+                <tr data-ng-repeat="c in neglectedCustomers">
+                    <td><a href="#/Display/{{c.CustomerId}}">{{c.CustomerName}}</a></td>
+                    <td>{{ c.LastOrderDate }}</td> 
+                    <td>{{ c.CurrentYearlyTotal | currency }}</td>
+                    <td>{{ c.PreviousYearlyTotal | currency }}</td>
+                </tr>   
+            </table>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-12">
+        <fieldset>
+            <legend><h2>Customer Search</h2></legend>
+            <div class="col-md-4">
+                <angucomplete-alt id="items"
+                          placeholder="Search Customers by Name"
+                          pause="100"
+                          minlength="1"
+                          remote-url="../../services/Customer/getCustomersByName.php?CustomerName="
+                          remote-url-data-field="results"
+                          title-field="Name"
+                          input-class="form-control form-control-small"
+                          selected-object="customerSelected"
+                          />
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-default" data-ng-click="showCustomerDirectory()"><i class="glyphicon glyphicon-phone-alt"></i>&nbsp;&nbsp;Customer Directory</button>
+            </div>
+        </fieldset>
+    </div>
+    <div class="col-md-12">
+        <br>
+        <table class="table-condensed table-bordered col-md-8" data-ng-show="showSearchResults">
+                <tr> 
+                    <th>Customer Name</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Phone Number</th>
+                </tr>
+                <tr data-ng-repeat="c in customerSearchResult">
+                    <td><a href="#/Display/{{c.Id}}">{{c.Name}}</a></td>
+                    <td>{{ c.BillAddress.City }}</td> 
+                    <td>{{ c.BillAddress.State.Name }}</td>
+                    <td>{{ c.ContactDetail.Phone }}</td>
+                </tr>   
+            </table>
+    </div>
+</div>

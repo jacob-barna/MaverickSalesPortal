@@ -1,0 +1,107 @@
+<!-- todo: ideally this shared div would be in a layout page shared across all pages -->
+<div class="col-md-8">
+</div>
+<div class="col-md-4">
+    <div class="col-md-12">
+        Welcome {{ currentUser.FirstName }}
+    </div>
+   
+</div>
+<div class="col-md-12">
+<h1>Create Customer</h1>
+<form name="createCustomerForm" method="POST" novalidate data-ng-submit="CreateCustomer(Customer)">
+    <label for="CustomerName">Customer Name:</label><br>
+    <input type="text" name="CustomerName" data-ng-model="Customer.Name" id="CustomerName" required data-ng-maxlength="128">
+                <span class="error" data-ng-show="createCustomerForm.CustomerName.$error.required">*</span>    
+                <span class="error" data-ng-show="createCustomerForm.CustomerName.$error.maxlength">String is too long.</span>    
+    <br><br>
+    <div class="col-md-4">
+        <fieldset>
+            <legend>Billing Address</legend>
+            <label for="BillAddress_Line1">Line 1:</label><br>
+            <input type="text" name="BillAddress_Line1" id="BillAddress_Line1" data-ng-model="Customer.BillAddress.Line1" required data-ng-maxlength="128">
+                <span class="error" data-ng-show="createCustomerForm.BillAddress_Line1.$error.required">*</span>    
+                <span class="error" data-ng-show="createCustomerForm.BillAddress_Line1.$error.maxlength">String is too long.</span>    
+                <br>
+            <label for="BillAddress_Line2">Line 2:</label><br>
+            <input type="text" name="BillAddress_Line2" id="BillAddress_Line2" data-ng-model="Customer.BillAddress.Line2" required data-ng-maxlength="128">
+            <span class="error" data-ng-show="createCustomerForm.BillAddress_Line2.$error.required">*</span>    
+                <span class="error" data-ng-show="createCustomerForm.BillAddress_Line2.$error.maxlength">String is too long.</span>    
+                <br>
+            <label for="BillAddress_City">City:</label><br>
+            <input type="text" name="BillAddress_City" id="BillAddress_City" data-ng-model="Customer.BillAddress.City" required data-ng-maxlength="128">
+            <span class="error" data-ng-show="createCustomerForm.BillAddress_City.$error.required">*</span>    
+                <span class="error" data-ng-show="createCustomerForm.BillAddress_City.$error.maxlength">String is too long.</span>    
+                <br>
+            <label for="BillAddress_State">State:</label><br>
+                <select id="BillAddress_State" name="BillAddress_State" data-ng-model="Customer.BillAddress.StateId" required>
+                    <option ng-repeat="s in stateList" value="{{s.Id}}">{{s.Abbreviation}}</option>
+                </select>
+            <span class="error" data-ng-show="createCustomerForm.BillAddress_State.$error.required">*</span>    
+            <br>
+                <label for="BillAddress_Zip">Zip</label><br>
+                <input type="text" name="BillAddress_Zip" id="BillAddress_Zip" data-ng-model="Customer.BillAddress.Zip" data-ng-maxlength="5" size="5" required data-ng-minlength="5">
+                <span class="error" data-ng-show="createCustomerForm.BillAddress_Zip.$error.required">*</span>    
+                <span class="error" data-ng-show="createCustomerForm.BillAddress_Zip.$error.maxlength">String is too long.</span>    
+        </fieldset>
+        
+        <br><br>
+            <!----> 
+        <button type="button" data-ng-disabled="createCustomerForm.BillAddress_Line1.$error.required || createCustomerForm.BillAddress_Zip.$error.required || createCustomerForm.BillAddress_State.$error.required || createCustomerForm.BillAddress_City.$error.required || createCustomerForm.BillAddress_Line2.$error.required;" data-ng-click="Customer.ShipAddress.Line1=Customer.BillAddress.Line1; Customer.ShipAddress.Line2=Customer.BillAddress.Line2; Customer.ShipAddress.City=Customer.BillAddress.City; Customer.ShipAddress.StateId=Customer.BillAddress.StateId; Customer.ShipAddress.Zip=Customer.BillAddress.Zip;">Copy =></button>
+    </div>
+    <div class="col-md-4">
+        <fieldset>
+            <legend>Shipping Address</legend>
+            <label for="ShipAddress_Line1">Line 1:</label><br>
+            <input type="text" name="ShipAddress_Line1" id="ShipAddress_Line1" data-ng-model="Customer.ShipAddress.Line1" required data-ng-maxlength="128">
+                <span class="error" data-ng-show="createCustomerForm.ShipAddress_Line1.$error.required">*</span>    
+                <span class="error" data-ng-show="createCustomerForm.ShipAddress_Line1.$error.maxlength">String is too long.</span>    
+                <br>
+            <label for="ShipAddress_Line2">Line 2:</label><br>
+            <input type="text" name="ShipAddress_Line2" id="ShipAddress_Line2" data-ng-model="Customer.ShipAddress.Line2" required data-ng-maxlength="128">
+            <span class="error" data-ng-show="createCustomerForm.ShipAddress_Line2.$error.required">*</span>    
+                <span class="error" data-ng-show="createCustomerForm.ShipAddress_Line2.$error.maxlength">String is too long.</span>    
+                <br>
+            <label for="ShipAddress_City">City:</label><br>
+            <input type="text" name="ShipAddress_City" id="ShipAddress_City" data-ng-model="Customer.ShipAddress.City" required data-ng-maxlength="128">
+            <span class="error" data-ng-show="createCustomerForm.ShipAddress_City.$error.required">*</span>    
+                <span class="error" data-ng-show="createCustomerForm.ShipAddress_City.$error.maxlength">String is too long.</span>    
+                <br>
+            <label for="ShipAddress_State">State:</label><br>
+                <select id="ShipAddress_State" name="ShipAddress_State" data-ng-model="Customer.ShipAddress.StateId" required>
+                    <option ng-repeat="s in stateList" value="{{s.Id}}">{{s.Abbreviation}}</option>
+                </select>
+            <span class="error" data-ng-show="createCustomerForm.ShipAddress_State.$error.required">*</span>    
+            <br>
+                <label for="ShipAddress_Zip">Zip</label><br>
+                <input type="text" name="ShipAddress_Zip" id="ShipAddress_Zip" data-ng-model="Customer.ShipAddress.Zip" data-ng-maxlength="5" size="5" required data-ng-minlength="5">
+                <span class="error" data-ng-show="createCustomerForm.ShipAddress_Zip.$error.required">*</span>    
+                <span class="error" data-ng-show="createCustomerForm.ShipAddress_Zip.$error.maxlength">String is too long.</span>    
+        </fieldset>
+    </div>
+    <div class="col-md-4">
+        <fieldset>
+            <legend>Contact Information</legend>
+            <label for="ContactInfo_Phone">Phone:</label><br>
+            <input type="text" name="ContactInfo_Phone" id="ContactInfo_Phone" data-ng-model="Customer.ContactInfo.Phone" required data-ng-maxlength="128">
+            <span class="error" data-ng-show="createCustomerForm.ContactInfo_Phone.$error.required">*</span>    
+            <span class="error" data-ng-show="createCustomerForm.ContactInfo_Phone.$error.maxlength">String is too long.</span>    
+            <br>
+            <label for="ContactInfo_Fax">Fax:</label><br>
+            <input type="text" name="ContactInfo_Fax" id="ContactInfo_Fax" data-ng-model="Customer.ContactInfo.Fax" data-ng-maxlength="128">
+            <span class="error" data-ng-show="createCustomerForm.ContactInfo_Fax.$error.maxlength">String is too long.</span>    
+            <br>
+            <label for="ContactInfo_Email">Email:</label><br>
+            <input type="text" name="ContactInfo_Email" id="ContactInfo_Email" data-ng-model="Customer.ContactInfo.Email" data-ng-maxlength="128">
+            <span class="error" data-ng-show="createCustomerForm.ContactInfo_Email.$error.maxlength">String is too long.</span>    
+            <br>
+            <label for="ContactInfo_WebAddress">Web Address:</label><br>
+            <input type="text" name="ContactInfo_WebAddress" id="ContactInfo_WebAddress" data-ng-model="Customer.ContactInfo.WebAddress" data-ng-maxlength="128">
+            <span class="error" data-ng-show="createCustomerForm.ContactInfo_WebAddress.$error.maxlength">String is too long.</span>    
+            <br>
+        </fieldset>
+        <br><br>
+        <input type="submit" class="btn" value="Save Customer" data-ng-disabled="createCustomerForm.$invalid" />
+    </div>
+</form>
+</div>
