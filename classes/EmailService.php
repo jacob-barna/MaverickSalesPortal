@@ -14,8 +14,8 @@ class EmailService {
         try {   
             $ses = SesClient::factory(array(
                     'credentials' => array(
-                    'key' => 'AKIAJNSE7CABB6NB6KSQ',
-                    'secret' => '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'),
+                    'key' => 'are you the keymaster',
+                    'secret' => 'c-tech astronomy'),
                     'region'      => 'us-east-1',
                     'version' => '2010-12-01',
                 ));
@@ -39,7 +39,7 @@ class EmailService {
                             'Data' => 'Access Request for ' . $requestorFirstName . ' ' . $requestorLastName,
                         ],
                     ],
-                    'Source' => 'jbarna@unomaha.edu',
+                    'Source' => 'someone@somewhere',
                 ]);
         }
         catch(Exception $e)
@@ -84,7 +84,7 @@ class EmailService {
                             'Data' => $Subject,
                         ],
                     ],
-                    'Source' => 'jbarna@unomaha.edu',
+                    'Source' => 'someone@somewhere',
                 ]);
         }
         
@@ -99,8 +99,8 @@ class EmailService {
     {
         return SesClient::factory(array(
                     'credentials' => array(
-                    'key' => 'AKIAJNSE7CABB6NB6KSQ',
-                    'secret' => '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'),
+                    'key' => 'are you the keymaster',
+                    'secret' => 'c-tech astronomy'),
                     'region'      => 'us-east-1',
                     'version' => '2010-12-01',
                 ));
@@ -118,8 +118,8 @@ class EmailService {
         try {   
             $ses = SesClient::factory(array(
                     'credentials' => array(
-                    'key' => 'AKIAJNSE7CABB6NB6KSQ',
-                    'secret' => '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'),
+                    'key' => 'are you the keymaster',
+                    'secret' => 'c-tech astronomy'),
                     'region'      => 'us-east-1',
                     'version' => '2010-12-01',
                 ));
@@ -140,7 +140,7 @@ class EmailService {
                             'Data' => 'Maverick Sales Portal - Your registration has been received.',
                         ],
                     ],
-                    'Source' => 'jbarna@unomaha.edu',
+                    'Source' => 'someone@somewhere',
                 ]);
         }
         catch(Exception $e)
